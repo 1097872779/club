@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       <hibernate-mapping>
+       <class name="domain.Club"  table="member">
+              <id name="cid"  column="cid">
+                      <generator class="native"/> 
+              </id>
+               <property name="cno"  column="cno" length="20" not-null="true"></property>
+              <property name="cname" column="cname" length="20"></property>
+              <property name="csex" column="csex" length="20"></property>
+              <property name="cage" column="cage" length="20"></property>
+              <property name="cphone" column="cphone" length="40"></property>
+              <property name="school" column="school" length="20"></property>
+              <property name="cclub" column="cclub" length="20"></property>
+              
+       </class>
+       
+       
+       </hibernate-mapping>

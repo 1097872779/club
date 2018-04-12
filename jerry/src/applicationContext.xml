@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/aop    
+                          http://www.springframework.org/schema/aop/spring-aop-3.1.xsd   
+                         http://www.springframework.org/schema/tx    
+                          http://www.springframework.org/schema/tx/spring-tx-3.1.xsd "> 
+       
+        <!-- 配置链接池 -->
+          <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+               <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+               <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/jerry"/>
+               <property name="user" value="root"/>
+               <property name="password" value="root"/>
+          </bean>
+          
+          <!-- 配置Hibernate的相关属性 -->
+          <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+                  <!-- 注入链接池 -->
+                  <property name="dataSource" ref="dataSource"/>
+                  <!-- 配置Hibernate的属性 -->
+                   <property name="hibernateProperties">
+                                 <props>                                               
+                                                 <prop  key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                                                  <prop key="hibernate.show_sql">true</prop>
+                                                  <prop key="hibernate.format_sql">true</prop>
+                                                  <prop key="hibernate.hbm2ddl.auto">update</prop>
+                                 </props>
+                   </property>
+                  <!-- 加载Hibernate中的映射文件 -->
+                  <property name="mappingResources">
+                                  <list>
+                                               <value>domain/Student.hbm.xml</value>
+                                               <value>domain/Apply.hbm.xml</value>
+                                               <value>domain/Mapply.hbm.xml</value>
+                                               <value>domain/Manager.hbm.xml</value>
+                                               <value>domain/Info.hbm.xml</value>
+                                               <value>domain/Club.hbm.xml</value>
+                                  </list>
+                  </property>
+                   
+                  
+                  
+          </bean>
+          <!-- 配置Action的类 -->
+          <bean id="studentAction"   class="action.StudentAction" scope="prototype">
+                          <property name="studentService" ref="studentService"/>
+          </bean>
+          <bean id="applyAction" class="action.ApplyAction" scope="prototype">
+                          <property name="applyService" ref="applyService"></property> 
+          </bean>
+          <bean  id="mapplyAction"  class="action.MapplyAction" scope="prototype">
+                            <property name="mapplyService"  ref="mapplyService"/> 
+          </bean>
+          <bean  id="managerAction" class="action.ManagerAction" scope="prototype">
+                              <property name="managerService" ref="managerService"/>
+          </bean>
+          <bean id="infoAction" class="action.InfoAction" scope="prototype">
+                              <property name="infoService" ref="infoService"/>
+          </bean>
+          <bean id="clubAction" class="action.ClubAction" scope="prototype">
+                                 <property name="clubService" ref="clubService"/>
+          </bean>
+        <!-- 配置业务层的类 -->
+       <bean id="studentService"  class="service.StudentServiceImpl">
+                      <property name="studentDao" ref="studentDao"/>
+       </bean>
+       <bean id="applyService" class="service.ApplyServiceImpl">
+                       <property name="applyDao" ref="applyDao"/>
+       </bean>
+         <bean   id="mapplyService" class="service.MapplyServiceImpl">
+                        <property name="mapplyDao" ref="mapplyDao"/>
+         </bean>
+         <bean id="managerService" class="service.ManagerServiceImpl">
+                          <property name="managerDao" ref="managerDao"/>
+         </bean>
+         <bean name="infoService" class="service.InfoServiceImpl">
+                           <property name="infoDao" ref="infoDao"/>
+         </bean>
+         <bean  name="clubService" class="service.ClubServiceImpl">
+        					<property name="clubDao" ref="clubDao"/> 
+         </bean>
+         
+          <!-- 配置DAO的类 -->
+        <bean  id="studentDao" class="dao.StudentDaoImpl">
+                <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        <bean  id="applyDao" class="dao.ApplyDaoImpl">
+                  <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        <bean  id="mapplyDao" class="dao.MapplyDaoImpl">
+                    <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        <bean id="managerDao" class="dao.ManagerDaoImpl">
+                     <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        <bean id="infoDao" class="dao.InfoDaoImpl"> 
+                      <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        <bean  id="clubDao" class="dao.ClubDaoImpl">
+                        <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        
+          <!-- 配置事物管理器 -->
+          <bean id="transactionManager"  class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+                         <property name="sessionFactory"  ref="sessionFactory"/>
+          </bean>
+          
+           <!-- 开启注解事务 -->
+           <tx:annotation-driven  transaction-manager="transactionManager"/>
+</beans>

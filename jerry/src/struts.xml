@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+       <package  name="123"   extends="struts-default" namespace="/"> 
+                <action name="student_*"  class="studentAction"  method="{1}">
+                                     <result  name="input">/index.jsp</result>
+                                     <result  name="success" type="redirect">/frame.jsp</result>
+                                     <result name="saveSuccess">/registerSuccess.jsp</result>
+                                     <result name="loginSuccess">/houtai.jsp</result>
+                                     <result name="findAll">/list.jsp</result>
+                                    
+                </action>
+                
+                <action name="apply_*" class="applyAction" method="{1}">
+                              <result name="saveOk">/saveOk.jsp</result>
+                              <result name="OK">/applylist.jsp</result>
+                              <result name="deleteOK" >/deleteOK.jsp</result>
+                              <result name="editSuccess">/saveMember.jsp</result>
+                              <result name="edit1Success">/sendOK.jsp</result>
+                
+                </action>
+                <action name="mapply_*" class="mapplyAction"  method="{1}">
+                                   <result name="saveSuccess">/mapplySuccess.jsp</result>
+                                    <result name="findAll">/mlist.jsp</result>
+                                    <result name="findSuccess">/grant.jsp</result>
+                                    <result name="editSuccess">/grant.jsp</result>
+                                    <result name="edit1Success">/send.jsp</result>
+                                    <result name="deleteSuccess" type="redirectAction">mapply_findAll.action</result>
+                </action>
+                <action name="manager_*" class="managerAction" method="{1}">
+                                    <result name="saveSuccess">/send.jsp</result>
+                                    <result name="findAll">/managerlist.jsp</result>
+                                    <result name="deleteSuccess" type="redirectAction">manager_findAll.action</result>
+                                    <result name="buhao">/sorry.jsp</result>
+                                    <result name="hao">/ok.jsp</result>
+                                    <result name="Success" >/welcom.jsp</result>
+                                    <result name="saveOK">/saveYES.jsp</result>
+                </action>
+                <action  name="info_*" class="infoAction"  method="{1}">
+                             <result name="OK">/infolist.jsp</result>
+                             <result name="sendSuccess"  type="redirectAction">mapply_findAll.action</result>
+                             <result name="deleteSuccess"  type="redirectAction">info_findAll.action</result>   
+                             <result name="sendOK" >/sendinfook.jsp</result>                        
+                </action>
+                <action name="club_*" class="clubAction" method="{1}">
+                              <result name="OK">/member.jsp</result> 
+                              <result name="saveMember">/sendOK.jsp</result>   
+                              <result name="deleteOK">/clubDeleteOk.jsp</result>            
+                </action>
+       </package>
+       
+       
+   
+</struts>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       <hibernate-mapping>
+       <class name="domain.Apply"  table="apply">
+              <id name="did"  column="did">
+                      <generator class="native"/> 
+              </id>
+               <property name="eno"  column="eno" length="20" not-null="true"></property>
+              <property name="aname" column="aname" length="20"></property>
+              <property name="asex" column="asex" length="20"></property>
+              <property name="ahight" column="ahight" length="20"></property>
+              <property name="aage" column="aage" length="20"></property>
+              <property name="phone" column="phone" length="80"></property>
+              <property name="adress" column="adress" length="100"></property>
+              <property name="school" column="school" length="100"></property>
+              <property name="aclub" column="aclub" length="20"></property>
+              <property name="experience" column="experience" length="200"></property>
+              <property name="interest" column="interest" length="200"></property>
+              <property name="look" column="look" length="200"></property>
+       </class>
+       
+       
+       </hibernate-mapping>

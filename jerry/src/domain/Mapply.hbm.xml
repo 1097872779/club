@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       <hibernate-mapping>
+       <class name="domain.Mapply"  table="mapply">
+              <id name="mid"  column="mid">
+                      <generator class="native"/> 
+              </id>
+               <property name="mno"  column="mno" length="20" not-null="true"></property>
+              <property name="mname" column="mname" length="20"></property>
+              <property name="msex" column="msex" length="20"></property>
+              <property name="mclub" column="mclub" length="80"></property>
+              <property name="reason" column="reason" length="200"></property>
+              
+       </class>
+       
+       
+       </hibernate-mapping>
